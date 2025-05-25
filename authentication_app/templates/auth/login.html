@@ -1,0 +1,38 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+
+<div class="main">
+    <h2>Login</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 15px;">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                <input type="text" name="{{form.username.name}}" id="{{ form.username.id_for_label }}"
+                style="width: 95%; padding: 5px; margin-top: 2px; border-radius: 5px; border: 1px solid #ccc;"/>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                <input type="password" name="{{form.password.name}}" id="{{ form.password.id_for_label }}"
+                style="width: 95%; padding: 5px; margin-top: 2px; border-radius: 5px; border: 1px solid #ccc;" />
+            </div>
+
+            {% if form.non_field_errors %}
+                <div style="color: red; margin-bottom: 10px;">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-dark">Login</button>
+
+            <a href="{% url 'register' %}" class="btn btn-default">Not Register? Create an account</a>
+
+        </form>
+
+</div>
+
+{% endblock %}

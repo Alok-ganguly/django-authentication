@@ -1,0 +1,48 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+
+<div class="main">
+    <h2>Register</h2>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 15px;">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                <input type="text" name="{{form.username.name}}" id="{{ form.username.id_for_label }}"
+                style="width: 96%; padding: 5px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc;"/>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+                <input type="password" name="{{form.password1.name}}" id="{{ form.password1.id_for_label }}"
+                style="width: 96%; padding: 5px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc;" />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                <input type="password" name="{{form.password2.name}}" id="{{ form.password2.id_for_label }}"
+                style="width: 96%; padding: 5px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc;"/>
+            </div>
+
+            {% if form.errors %}
+            <div style="color: red; margin-bottom: 15px;">
+                <ul style="padding-left: 20px;">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-dark">Submit</button>
+
+            <a href="{% url 'login' %}" class="btn btn-default">Login</a>
+
+        </form>
+
+</div>
+
+{% endblock %}
